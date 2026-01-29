@@ -27,3 +27,19 @@ btnCambiar.addEventListener('click', () => {
     titulo.dataset.alt = alt ? '0' : '1';
     setEstado('Textos actualizados');
 });
+
+// Manejador del evento mouseover de los artículos
+const listaArticulos =$('#listaArticulos');
+
+listaArticulos.addEventListener('mouseover', (e) => { 
+    const card = e.target.closest('.card');
+    if (!card) return;
+    card.classList.add('is-highlight');
+});
+
+// Manejador del evento mouseout de los artículos
+listaArticulos.addEventListener('mouseout', (e) => { 
+     const card = e.target.closest('.card');
+    if (!card) return;
+    card.classList.remove('is-highlight');
+});

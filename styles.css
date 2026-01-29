@@ -149,3 +149,8 @@ dd{ margin:.25rem 0 0; color:var(--muted); }
   .menu{ display:none; }
   .menu.is-open{ display:flex; flex-direction:column; gap:.5rem; }
 }
+
+.card.is-highlight{
+  outline: 5px solid var(--accent);
+  transform: translateY(-2px);
+}
