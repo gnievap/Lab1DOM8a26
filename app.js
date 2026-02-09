@@ -99,9 +99,14 @@ const likeButtons = document.querySelectorAll(
 likeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         const card = btn.closest('.card');
-        const badge = card.querySelector('.badge');
-        const currentLikes = Number(badge.textContent) || 0;
-        badge.textContent = currentLikes + 1;
-        setEstado('Like agregado');
+        hacerLike(card);
+        
     });
 });
+
+const hacerLike = (card) => {
+    const badge = card.querySelector('.badge');
+    const currentLikes = Number(badge.textContent) || 0;
+    badge.textContent = currentLikes + 1;
+    setEstado('Like agregado');
+};
