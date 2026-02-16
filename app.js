@@ -121,3 +121,31 @@ const hacerLike = (card) => {
     badge.textContent = currentLikes + 1;
     setEstado('Like agregado');
 };
+
+// Filtrar cards
+const filtro = $('#filtro');
+
+// Unir título y texto de cada card
+// Y va a buscar  lo que el usuario escribió en el filtro
+
+const matchText = (card, q) => {
+    const title = card.querySelector('.card-title')?.textContent ?? '';
+    const text = card.querySelector('.card-text')?.textContent ?? '';
+    const haystack = (title + ' ' + text).toLowerCase();
+    return haystack.includes(q);
+};
+
+// Evento input: filtrar mientras se escribe en la caja de texto
+filtro.addEventListener('input', ()=>{
+    // q: lo que el usuario escribe en el input
+    const q = filtro.value.trim().toLowerCase();
+    const cards = $$('#listaArticulos .card');
+
+    cards.forEach((card) => {
+        const ok = q === '' ? true : matchText(card, q);
+        card.hidden = !ok;
+    });
+
+    setEstado( q === '' ? 'Filtro vacío' : `Filtro texto: "${q}"`);
+
+});
