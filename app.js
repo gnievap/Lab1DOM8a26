@@ -125,6 +125,8 @@ const hacerLike = (card) => {
 // Filtrar cards
 const filtro = $('#filtro');
 
+const filterState = {q: '', tag: ''};
+
 // Unir título y texto de cada card
 // Y va a buscar  lo que el usuario escribió en el filtro
 
@@ -133,6 +135,29 @@ const matchText = (card, q) => {
     const text = card.querySelector('.card-text')?.textContent ?? '';
     const haystack = (title + ' ' + text).toLowerCase();
     return haystack.includes(q);
+};
+
+const matchTag = (card, tag) => {
+    if (!tag) return true; // Si no hay tag, coinciden todas las cards
+    const tags = (card.dataset.tags || '').toLowerCase();
+    return tags.includes(tag.toLowerCase());
+};
+
+const applyFilters = () => {
+    const cards = $$('#listaArticulos .card');
+    cards.forEach((card) => {
+        const okText = filterState.q 
+            ? matchText(card, filterState.q) 
+            : true;
+        const okTag = matchTag(card, filterState.tag);
+        card.hidden = !(okText && okTag);
+    });
+    const parts =[];
+    if (filterState.q) parts.push(`Texto: "${filterState.q}"`);
+    if (filterState.tag) parts.push(`Tag: "${filterState.tag}"`);
+    setEstado(parts.length  
+        ? `Filtros aplicados (${parts.join(', ')})` 
+        : 'Filtro vacío');
 };
 
 // Evento input: filtrar mientras se escribe en la caja de texto
