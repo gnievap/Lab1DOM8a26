@@ -190,3 +190,30 @@ chips.addEventListener('click', (e) => {
     });
     setEstado(`Filtro por tag: "${tag}"`);
 });
+
+// Validar el formulario de suscripción
+const form = $('#formNewsletter');
+const email = $('#email');
+const interes = $('#interes');
+const feedback = $('#feedback');
+
+// validar el email con una expresión regular simple
+const isValidEmail = (value) => /^[^\s@]+@+[^\s@]+\.[^\s@]+$/.test(value);  
+
+form.addEventListener('submit', (e) => { 
+    // Evitar el envío del formulario
+    e.preventDefault(); 
+    const valueEmail = email.value.trim();
+    const valueInteres = interes.value.trim();
+
+    email.classList.remove('is-invalid');
+    interes.classList.remove('is-invalid');
+    feedback.textContent = '';
+
+    let ok = true;
+
+    if (!isValidEmail(valueEmail)) {
+        email.classList.add('is-invalid');
+        ok = false;
+    }
+});
