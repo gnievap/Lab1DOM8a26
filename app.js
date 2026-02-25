@@ -216,4 +216,15 @@ form.addEventListener('submit', (e) => {
         email.classList.add('is-invalid');
         ok = false;
     }
+
+    if (!valueInteres) {
+        interes.classList.add('is-invalid');
+        ok = false;
+    }
+
+    if (!ok) {
+        feedback.textContent = 'Revisa los campos marcados como inválidos.';
+        setEstado('Formulario con datos no válidos');
+        return;
+    }
 });
